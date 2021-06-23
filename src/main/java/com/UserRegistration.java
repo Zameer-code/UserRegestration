@@ -2,7 +2,7 @@ package com.bridgelabz.demo;
 
 /**
  * **************************************************************************** 
- * Purpose: Class is To create User Registration using Regular expression commands 
+ * Purpose: Class is To create User Registration using Lambda expression commands 
  * @author ZameerAhamad Ron <zameerraone96@gmail.com>
  * @version 1.4
  * @since 18-06-2020 ****************************************************************************
@@ -18,37 +18,74 @@ import java.util.regex.Pattern;
 public class UserRegistration {
     
 	
-    // UC1 - First name starts with Cap and has minimum 3 characters
-    public boolean firstName(String fN) {
-        return (Pattern.matches("[A-Z]{1}[a-z]{3,}", fN) == true);
-    }
+   public static void main(String[] args) {
+			
+			 //first name using lambda expression
+	        UserValidation validation = (firstName) ->{
+	            Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{3,}$");
+	            Matcher matcher = pattern.matcher(firstName);
+	            boolean check = matcher.find();
+	            if(check)
+	                System.out.println("valid first name");
+	            else
+	                System.out.println("invalid name");
+	        };
+	        validation.userValidation("Jackson");
 
-    // UC2 - Last name starts with Cap and has minimum 3 characters
-    public boolean lastName(String lN) {
-        return (Pattern.matches("[A-Z]{1}[a-z]{3,}", lN) == true);
-    }
+	        //last name using lambda expression
+	        UserValidation validation1 = (lastName) ->{
+	            Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{3,}$");
+	            Matcher matcher = pattern.matcher(lastName);
+	            boolean check1 = matcher.find();
+	            if (check1)
+	                System.out.println("valid last name");
+	            else
+	                System.out.println("invalid last name");
+	        };
+	        validation1.userValidation("Briggs");
 
-    /*
-     * UC 3 - enter a valid email UC 9 - Cleared All Sample Provided
-     */
-    public boolean email(String emailId) {
-        return (Pattern.matches("[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+", emailId) == true);
-    }
+	        //email using lambda expression
+	        UserValidation validation2 = (email) ->{
+	            Pattern pattern = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9_.]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+	            Matcher matcher = pattern.matcher(email);
+	            boolean check2 = matcher.find();
+	            if(check2)
+	                System.out.println("valid email");
+	            else
+	                System.out.println("invalid email");
+	        };
+	        validation2.userValidation("zameerraone96@gmail.com");
 
-    // UC4 - Mobile Format
-    public boolean mobile(String mobileNum) {
-        return(Pattern.matches("(0|91)?\\s{1}[6-9][0-9]{9}", mobileNum) == true);
-    }
+	        //mobile number using lambda expression
+	        UserValidation validation3 = (mobileNumber) ->{
+	            Pattern pattern = Pattern.compile("(0|91)?\\s{1}[6-9][0-9]{9}");
+	            Matcher matcher = pattern.matcher(mobileNumber);
+	            boolean check3 = matcher.find();
+	            if(check3)
+	                System.out.println("valid mobile number");
+	            else
+	                System.out.println("invalid mobile number");
+	        };
+	        validation3.userValidation("91 7892496608");
 
-    // UC 5 to 8 - Password
-    public boolean password(String pass) {
-        return ((Pattern.matches("[A-Z0-9a-z$%&*@!#]{8,}", pass) && Pattern.matches(".*[A-Z].*", pass) && Pattern.matches(".*[0-9].*", pass) && Pattern.matches(".*[\\W]{1}.*", pass)) == true);
-    }
+	        //password using lambda expression
+	        UserValidation userValidation4 = (password) ->{
+	            Pattern pattern = Pattern.compile("(\"[A-Z0-9a-z$%&*@!#]{8,}\", password) && (\".*[A-Z].*\", password) && (\".*[0-9].*\", password) && (\".*[\\W]{1}.*\", password)");
+	            Matcher matcher = pattern.matcher(password);
+	            boolean check4 = matcher.find();
 
-    public String happySad(String word) {
-        if (word.contains("Sad"))
-            return "Sad";
-        else
-            return "Happy";
-    }
+	            if(check4)
+	                System.out.println("valid password");
+	            else
+	                System.out.println("invalid password");
+	        };
+	        userValidation4.userValidation("Jack@88242");
+	    }
+
+		public Object email(String email) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		
 }
