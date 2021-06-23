@@ -62,4 +62,8 @@ public class UserRegistrationTest {
 	    public void passwordValidationRule4() {
 	        Assert.assertTrue(ur.passwordRule4("zameer6@Password"));
 	    }
+	    @Test
+   	    public void givenString_whenEntered_shouldReturnSad() {
+       	        Assertions.assertEquals("Sad",ur.happySad("Sad"));
+    }
 }
