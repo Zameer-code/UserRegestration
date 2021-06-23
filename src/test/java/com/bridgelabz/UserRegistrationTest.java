@@ -14,56 +14,33 @@ import org.junit.Assert;
 
 public class UserRegistrationTest {
 			
-	 UserRegistration ur= new UserRegistration();
-	    private Assert Assert;
+    private UserRegistration ur;
+    private String email;
+    private boolean expRes;
 
+    @Before
+    public void initialize() {
+        ur = new UserRegistration();
+    }
 
-	    @Test
-	    //create method fNValidation()
-	    public void fNValidation() {
-	        Assert.assertTrue(ur.firstName("Jackson"));
-	    }
+    public UserRegistrationTest(String email, boolean expRes) {
+        this.email=email;
+        this.expRes=expRes;
+    }
+    @Parameterized.Parameters
+    public static Collection inputEmails(){
+        return Arrays.asList(new Object[][] { {"abc@gmail.com",true},{"abc-100@gmail.com",true},{"abc.100@gmail.com",true},
+                {"abc111@abc.com",true},{"abc-100@abc.net",true},{"abc.100@gmail.com.au",true},{"abc@1.com",true},
+                {"abc@gmail.com.com",true},{"abc+100@gmail.com",true},{"abc",false},
+                {"abc@.com.my",false},{"abc123@.com",false},{"abc123@.com.com",false},
+                {".abc@abc.com",false},{"abc()*@abc.com",false},{".abc@!#$.com",false},{"abc..2002@abc.com",false},
+                {"abc.@abc.com",false},{"abc@abc@abc.com",false},{".abc@abc.com",false},{"abc@abc.com.1a",false},
+                {"abc@abc.com.aa.au",false}});
+    }
 
-	    @Test
-	    //create method lNValidation()
-	    public void lNValidation()        {
-	        Assert.assertTrue(ur.lastName("Briggs"));
-	    }
-
-	    @Test
-	    //create method emailValidation()
-	    public void emailValidation() {
-	        Assert.assertTrue(ur.email("zameerraone96@gmail.com"));
-	    }
-	    @Test
-	    //create method mobileValidation()
-	    public void mobileValidation() {
-	        Assert.assertTrue(ur.mobile("91 7892496608"));
-	    }
-	    @Test
-	    //create method passwordValidation()
-	    public void passwordValidation() {
-	        Assert.assertTrue(ur.password("zameerPassword"));
-	    }
-	    @Test
-	    //create method passwordValidationRule2()
-	    public void passwordValidationRule2() {
-	        Assert.assertTrue(ur.passwordRule2("zameerPassword"));
-	    }
-
-	    @Test
-	    //create method passwordValidationRule3()
-	    public void passwordValidationRule3() {
-	        Assert.assertTrue(ur.passwordRule3("zameer6Password"));
-	    }
-
-	    @Test
-	    //create method passwordValidationRule4()
-	    public void passwordValidationRule4() {
-	        Assert.assertTrue(ur.passwordRule4("zameer6@Password"));
-	    }
-	    @Test
-   	    public void givenString_whenEntered_shouldReturnSad() {
-       	        Assertions.assertEquals("Sad",ur.happySad("Sad"));
+    @Test
+    public void parameterizedWayOfEmailValidation() {
+        System.out.println("Parameterized Email is: "+ email);
+        Assert.assertEquals(expRes,ur.email(email));
     }
 }
